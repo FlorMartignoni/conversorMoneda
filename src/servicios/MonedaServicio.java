@@ -1,4 +1,4 @@
-package calculos;
+package servicios;
 import modelos.Moneda;
 import java.util.Scanner;
 

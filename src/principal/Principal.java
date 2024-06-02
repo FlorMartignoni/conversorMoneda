@@ -1,7 +1,7 @@
-package Principal;
+package principal;
 
-import calculos.MonedaServicio;
-import calculos.Request;
+import servicios.MonedaServicio;
+import servicios.Request;
 import modelos.Moneda;
 
 import java.util.InputMismatchException;
@@ -51,7 +51,7 @@ public class Principal {
                 }
             }
 
-            
+
             switch(opcion){
                 case 1:
                     System.out.println("UD ELIGIÓ: Ver el listado de monedas completos");
