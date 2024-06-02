@@ -19,10 +19,22 @@ public class Request {
     Double valorMonedaAConvertir;
 
 
-    public void Request(){
+    public void Request() {
         {
             try {
-                String ingreso = scanner.next();
+
+                String ingreso = "";
+
+                do {
+                    ingreso = scanner.next();
+
+                    // Verificar si la entrada contiene solo letras
+                    if (!ingreso.matches("[a-zA-Z]+") || ingreso.length() != 3) {
+                        System.out.println("Ingreso inválido, debe ingresar solo tres letras. Intente nuevamente.");
+                    }
+
+                } while (!ingreso.matches("[a-zA-Z]+") || ingreso.length() != 3);
+
                 String direccion = "https://v6.exchangerate-api.com/v6/66fa9fddee3e7c108abe77ca/latest/" + ingreso.toUpperCase();
                 //System.out.println(direccion);
                 HttpClient client = HttpClient.newHttpClient();
@@ -35,8 +47,6 @@ public class Request {
                         .send(request, HttpResponse.BodyHandlers.ofString());
 
                 String json = response.body();
-                // System.out.println(json);
-
 
                 Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES).create();
                 MonedaAPI monedaApi = gson.fromJson(json, MonedaAPI.class);
@@ -47,34 +57,37 @@ public class Request {
                 } else {
                     System.out.println("No se pudo inicializar MonedaAPI");
                 }
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
+
             }
         }
     }
 
-    public void establecerMonedaAConvertir(String monedaAConvertir){
+        public void establecerMonedaAConvertir (String monedaAConvertir){
 
-        monedaAConvertirLocal = monedaAConvertir;
-        valorMonedaAConvertir = moneda.getMonedaAConvertirLista().get(monedaAConvertir);
+            monedaAConvertirLocal = monedaAConvertir;
+            valorMonedaAConvertir = moneda.getMonedaAConvertirLista().get(monedaAConvertir);
 
-        System.out.println("La moneda elegida fue: " + monedaAConvertir + ", y su valor es: "
-                + valorMonedaAConvertir);
+            System.out.println("La moneda elegida fue: " + monedaAConvertir + ", y su valor es: "
+                    + valorMonedaAConvertir);
+        }
 
-    }
 
-    public void CalculoConversion(String monedaLocal){
-        System.out.println("Ingrese el monto de "+ moneda.getMonedaBase() +" que desea convertir a "
+
+    public void CalculoConversion(String monedaLocal) {
+        System.out.println("Ingrese el monto de " + moneda.getMonedaBase() + " que desea convertir a "
                 + monedaLocal);
         valorMonedaAConvertir = moneda.getMonedaAConvertirLista().get(monedaLocal);
         double monto = scanner.nextDouble();
-
         monto = monto * valorMonedaAConvertir;
         System.out.println("El resultado de la conversión es: " + monto + " " + monedaLocal);
     }
 
-
 }
+
+
+
+

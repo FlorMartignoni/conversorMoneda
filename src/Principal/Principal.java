@@ -4,6 +4,7 @@ import calculos.MonedaServicio;
 import calculos.Request;
 import modelos.Moneda;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Principal {
@@ -35,12 +36,22 @@ public class Principal {
 
         int opcion = 0;
 
-        System.out.println(menu);
+            do {
+                System.out.println(menu);
+                boolean inputValida = false;
 
-        do{
-            System.out.println("Ingrese la opción elegida del Menu:");
-            opcion = scanner.nextInt();
+            while (!inputValida) {
+                try {
+                    System.out.println("Ingrese la opción elegida del Menu:");
+                    opcion = scanner.nextInt();
+                    inputValida = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Ingreso inválido, debe elegir un número del 1 al 5.");
+                    scanner.next(); // Limpiar el buffer del scanner
+                }
+            }
 
+            
             switch(opcion){
                 case 1:
                     System.out.println("UD ELIGIÓ: Ver el listado de monedas completos");
