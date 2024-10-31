@@ -35,7 +35,7 @@ public class Request {
 
                 } while (!ingreso.matches("[a-zA-Z]+") || ingreso.length() != 3);
 
-                String direccion = "https://v6.exchangerate-api.com/" + ingreso.toUpperCase();
+                String direccion = "https://v6.exchangerate-api.com/ApiKey" + ingreso.toUpperCase();
                 //System.out.println(direccion);
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder()
