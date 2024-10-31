@@ -19,7 +19,7 @@ public class Request {
     Double valorMonedaAConvertir;
 
 
-    public void Request() {
+    public void Request() {        
         {
             try {
 
@@ -35,7 +35,7 @@ public class Request {
 
                 } while (!ingreso.matches("[a-zA-Z]+") || ingreso.length() != 3);
 
-                String direccion = "https://v6.exchangerate-api.com/v6/66fa9fddee3e7c108abe77ca/latest/" + ingreso.toUpperCase();
+                String direccion = "https://v6.exchangerate-api.com/" + ingreso.toUpperCase();
                 //System.out.println(direccion);
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder()
